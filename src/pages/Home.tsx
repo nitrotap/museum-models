@@ -41,7 +41,7 @@ const Home: React.FC = () => {
         {/* Layout with text area and model container side by side */}
         <div className="content-container">
           <div className="text-area">
-            <IonText style={{ height: '70vh', width: '20vw', position: 'absolute', zIndex: 1 }} color={"dark"}>{text}</IonText>
+            <IonText style={{ height: '70vh', width: '20vw', position: 'absolute', zIndex: 1, color: '#ffffff' }}>{text}</IonText>
           </div>
           <div className="model-container">
             {activeScene === 'cube' && <ThreeScene />}
