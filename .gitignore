@@ -32,3 +32,4 @@ yarn-error.log*
 
 /.vscode
 /public/models
+/public/assets

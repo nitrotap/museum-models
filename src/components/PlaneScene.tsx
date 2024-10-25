@@ -1,3 +1,4 @@
+import { IonText } from '@ionic/react';
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three-stdlib';
@@ -12,7 +13,7 @@ const PlaneScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
 
         // Set renderer size and append it to the DOM
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight * .7);
         if (mountRef.current) {
             mountRef.current.appendChild(renderer.domElement);
         }
@@ -84,9 +85,11 @@ const PlaneScene: React.FC = () => {
     return (
         <div>
             <div style={{ padding: '10px', textAlign: 'center' }}>
-                <p>
-                    "Beechcraft C18 S Floats version" (https://skfb.ly/6WIAP) by helijah is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-                </p>
+                <IonText>
+                    <p style={{ width: '80%', paddingLeft: '40vw' }}>
+                        "Beechcraft C18 S Floats version" (https://skfb.ly/6WIAP) by helijah is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+                    </p>
+                </IonText>
             </div>
             <div ref={mountRef} />
         </div>

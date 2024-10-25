@@ -10,7 +10,7 @@ const ThreeScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer();
 
         // Set the renderer size to fill the screen
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight * .8);
         if (mountRef.current) {
             mountRef.current.appendChild(renderer.domElement);
         }
