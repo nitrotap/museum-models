@@ -13,7 +13,7 @@ const PlaneScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
 
         // Set renderer size and append it to the DOM
-        renderer.setSize(window.innerWidth, window.innerHeight * .7);
+        renderer.setSize(window.innerWidth * .7, window.innerHeight * .7);
         if (mountRef.current) {
             mountRef.current.appendChild(renderer.domElement);
         }
@@ -63,8 +63,8 @@ const PlaneScene: React.FC = () => {
 
         // Handle window resizing
         const handleResize = () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+            const width = window.innerWidth * .7;
+            const height = window.innerHeight * .7;
             renderer.setSize(width, height);
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
@@ -86,7 +86,7 @@ const PlaneScene: React.FC = () => {
         <div>
             <div style={{ padding: '10px', textAlign: 'center' }}>
                 <IonText>
-                    <p style={{ width: '80%', paddingLeft: '40vw', color: '#fff' }}>
+                    <p style={{ color: '#fff' }}>
                         "Beechcraft C18 S Floats version" (https://skfb.ly/6WIAP) by helijah is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
                     </p>
                 </IonText>

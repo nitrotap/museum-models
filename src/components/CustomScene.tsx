@@ -15,7 +15,7 @@ const PlaneScene: React.FC = () => {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
 
         // Set renderer size and append it to the DOM
-        renderer.setSize(window.innerWidth, window.innerHeight * .7);
+        renderer.setSize(window.innerWidth * .7, window.innerHeight * .7);
         if (mountRef.current) {
             mountRef.current.appendChild(renderer.domElement);
         }
@@ -65,8 +65,8 @@ const PlaneScene: React.FC = () => {
 
         // Handle window resizing
         const handleResize = () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
+            const width = window.innerWidth * .7;
+            const height = window.innerHeight * .7;
             renderer.setSize(width, height);
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
@@ -86,11 +86,13 @@ const PlaneScene: React.FC = () => {
 
     return (
         <div>
-            <IonText>
-                <p style={{ width: '80%', paddingLeft: '40vw', color: '#fff' }}>
-                    "WW Plane" (https://www.fab.com/listings/4d9445be-9c5f-426c-9ce7-ba6271eb65c6) by Alejo is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-                </p>
-            </IonText>
+            <div style={{ padding: '10px', textAlign: 'center' }}>
+                <IonText>
+                    <p style={{ color: '#fff' }}>
+                        "WW Plane" (https://www.fab.com/listings/4d9445be-9c5f-426c-9ce7-ba6271eb65c6) by Alejo is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+                    </p>
+                </IonText>
+            </div>
             <div ref={mountRef} />
         </div>
     );

@@ -4,24 +4,30 @@
     align-items: flex-start;
     padding: 20px;
     height: calc(100vh - 100px);
-    /* Adjust height if needed */
     background-color: black;
 }
 
 .text-area {
     width: 25%;
-    /* Adjust width as necessary */
     height: 60vh;
     padding-right: 20px;
 }
 
 .model-container {
-    width: 75%;
-    /* Adjust width as necessary */
+    width: 70%;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.model-text {
+    height: 70vh;
+    width: 20vw;
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    overflow: auto;
 }
 
 /* Styling for the thumbnail slider */

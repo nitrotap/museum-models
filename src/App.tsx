@@ -32,8 +32,6 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import ThreePage from './pages/ThreePage';
-import AdminPage from './pages/Admin';
 
 setupIonicReact();
 
@@ -41,14 +39,11 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/home">
+        <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route exact path="/three">
-          <ThreePage />
+        <Route exact path="/home">
+          <Redirect to="/" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>
