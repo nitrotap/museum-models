@@ -86,7 +86,7 @@ const PlaneScene: React.FC = () => {
         <div>
             <div style={{ padding: '10px', textAlign: 'center' }}>
                 <IonText>
-                    <p style={{ width: '80%', paddingLeft: '40vw' }}>
+                    <p style={{ width: '80%', paddingLeft: '40vw', color: '#fff' }}>
                         "Beechcraft C18 S Floats version" (https://skfb.ly/6WIAP) by helijah is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
                     </p>
                 </IonText>
