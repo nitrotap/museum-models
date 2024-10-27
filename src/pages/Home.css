@@ -69,3 +69,8 @@
     transform: scale(1.3);
     opacity: 1;
 }
+
+#root>ion-app>ion-router-outlet>div>ion-content>div.content-container>div.text-area>ion-text>ion-card>ion-card-content>div {
+    border: none !important;
+    padding: 0 !important;
+}
