@@ -117,9 +117,37 @@ const Home: React.FC = () => {
     </IonCard>
   );
 
-  const scenes = [
-    { name: 'plane', label: 'Plane Model', image: '/assets/thumbnails/plane.png', modelPath: '/models/airplane/scene.gltf', attribution: '"Beechcraft C18 S Floats version" by helijah', cameraPosition: [], lightIntensity: 5 },
-    { name: 'custom', label: 'Custom Model', image: '/assets/thumbnails/plane_2.png', modelPath: '/models/ww_plane_gltf/scene.gltf', attribution: '"WW Plane" by Alejo', cameraPosition: [0, -1, 0], lightIntensity: 50 }
+  // Define the Scene type
+  interface Scene {
+    name: string;
+    label: string;
+    image: string;
+    modelPath: string;
+    attribution: string;
+    cameraPosition: number[]; // Array of numbers
+    lightIntensity: number;
+  }
+
+  // Define the scenes array with the Scene type
+  const scenes: Scene[] = [
+    {
+      name: 'plane',
+      label: 'Plane Model',
+      image: '/assets/thumbnails/plane.png',
+      modelPath: '/models/airplane/scene.gltf',
+      attribution: '"Beechcraft C18 S Floats version" by helijah',
+      cameraPosition: [],
+      lightIntensity: 5
+    },
+    {
+      name: 'diamond',
+      label: 'Diamond Model',
+      image: '/assets/thumbnails/plane_diamond.png',
+      modelPath: '/models/diamond_da42_twin_star_gltf/scene.gltf',
+      attribution: '"WW Plane" by Alejo',
+      cameraPosition: [],
+      lightIntensity: 5
+    }
   ];
 
 
@@ -128,18 +156,34 @@ const Home: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <div style={{ display: 'flex' }}>
-            <IonIcon icon={appIcon} size='large'></IonIcon>
+            <IonIcon icon={appIcon} size='large' style={{ marginLeft: '10px' }}></IonIcon>
             <IonTitle>Museum Kiosk</IonTitle>
           </div>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Museum Kiosk</IonTitle>
           </IonToolbar>
         </IonHeader>
 
+        {/* Thumbnail Slider at the top */}
+        <div className="thumbnail-slider">
+          <Swiper spaceBetween={10} slidesPerView={scenes.length} centeredSlides modules={[Navigation, Pagination, Scrollbar]}
+            navigation pagination={{ clickable: true }} scrollbar={{ draggable: true }}>
+            {scenes.map((scene, index) => (
+              <SwiperSlide key={index} onClick={() => setActiveScene(scene.name)}>
+                <div className={`thumbnail ${activeScene === scene.name ? 'active' : ''}`}>
+                  <img src={scene.image} alt={scene.label} />
+                  <IonText color="light"><p>{scene.label}</p></IonText>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Content Container with Text and Model */}
         <div className="content-container">
           <div className="text-area">
             <IonText className='model-text'>{text}</IonText>
@@ -156,20 +200,6 @@ const Home: React.FC = () => {
               )
             )}
           </div>
-        </div>
-
-        <div className="thumbnail-slider">
-          <Swiper spaceBetween={10} slidesPerView={scenes.length} centeredSlides modules={[Navigation, Pagination, Scrollbar]}
-            navigation pagination={{ clickable: true }} scrollbar={{ draggable: true }}>
-            {scenes.map((scene, index) => (
-              <SwiperSlide key={index} onClick={() => setActiveScene(scene.name)}>
-                <div className={`thumbnail ${activeScene === scene.name ? 'active' : ''}`}>
-                  <img src={scene.image} alt={scene.label} />
-                  <IonText color="light"><p>{scene.label}</p></IonText>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
         </div>
       </IonContent>
     </IonPage>

@@ -3,14 +3,17 @@
     flex-direction: row;
     align-items: flex-start;
     padding: 20px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 200px);
+    /* Adjusted to account for the Swiper */
     background-color: black;
+    overflow: scroll;
 }
 
 .text-area {
-    width: 25%;
+    /* width: 25%; */
     height: 60vh;
     padding-right: 20px;
+    overflow: scroll;
 }
 
 .model-container {
@@ -24,25 +27,17 @@
 .model-text {
     height: 70vh;
     width: 20vw;
-    position: absolute;
-    z-index: 1;
     color: #fff;
     overflow: auto;
 }
 
 /* Styling for the thumbnail slider */
 .thumbnail-slider {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    z-index: 10;
+    padding: 20px;
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
-    background-color: black;
-    padding: 20px;
 }
 
 .thumbnail {
@@ -70,7 +65,77 @@
     opacity: 1;
 }
 
-#root>ion-app>ion-router-outlet>div>ion-content>div.content-container>div.text-area>ion-text>ion-card>ion-card-content>div {
+.text-area>ion-text>ion-card>ion-card-content>div {
     border: none !important;
     padding: 0 !important;
+}
+
+/* Tablet view: At 768px or below, set text-area to 40% and model-container to 60% */
+@media (max-width: 1024px) {
+    .text-area {
+        width: 40%;
+        height: auto;
+        padding-right: 10px;
+    }
+
+    .model-container {
+        width: 60%;
+        /* height: 60vh; */
+    }
+
+    .thumbnail-slider {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .thumbnail {
+        width: 60px;
+        margin: 5px;
+    }
+}
+
+/* Mobile view: At 480px or below, stack elements vertically, reverse order, and add spacing */
+@media (max-width: 480px) {
+    .content-container {
+        flex-direction: column-reverse;
+        /* Swap positions */
+        align-items: center;
+        padding: 10px;
+    }
+
+    .text-area {
+        width: 100%;
+        height: auto;
+        padding-right: 0;
+        margin-top: 5vw;
+        min-height: 100vh;
+        /* Add space between text-area and model-container */
+    }
+
+    .model-container {
+        width: 100%;
+        height: 60vh;
+        margin-bottom: 20px;
+        /* Add space to separate model-container from other elements */
+    }
+
+    .model-text {
+        width: 90vw;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .thumbnail-slider {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .thumbnail {
+        width: 50px;
+        margin: 5px;
+    }
+
+    .thumbnail p {
+        font-size: 0.7em;
+    }
 }
