@@ -1,4 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTextarea, IonText, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon } from '@ionic/react';
+import {
+  IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText,
+  IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonIcon
+} from '@ionic/react';
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -6,15 +9,34 @@ import { Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import PlaneScene from '../components/PlaneScene';
-import CustomScene from '../components/CustomScene';
+import SharedScene from '../components/SharedScene';
 import './Home.css';
-import appIcon from '../../public/assets/icon.svg'
+import appIcon from '../../public/assets/icon.svg';
+
+
+export const Scene = class {
+  name: string;
+  label: string;
+  image: string;
+  modelPath: string;
+  attribution: string;
+  cameraPosition: Array<number>;
+  lightIntensity: number;
+
+  constructor(name: string, label: string, image: string, modelPath: string, attribution: string, cameraPosition: Array<number>, lightIntensity: number) {
+    this.name = name;
+    this.label = label;
+    this.image = image;
+    this.modelPath = modelPath
+    this.attribution = attribution
+    this.cameraPosition = cameraPosition
+    this.lightIntensity = lightIntensity
+  }
+}
+
 
 const Home: React.FC = () => {
   const [activeScene, setActiveScene] = useState<string>('plane');
-
-  // const text = 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem vitae nemo voluptas error atque, rem qui numquam? Perferendis labore placeat quaerat, reiciendis, perspiciatis maiores temporibus laudantium fugit nulla rem dicta. Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel modi animi totam ipsum ad reprehenderit delectus facilis quasi repellat expedita, et officiis libero doloribus necessitatibus recusandae quia maiores tenetur amet. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum ipsa deleniti perspiciatis. Illum quis cupiditate placeat beatae. Repellat, velit ipsum eius, ipsam nihil illo non quaerat dolor numquam debitis beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto qui suscipit accusamus temporibus, cumque non quam laboriosam quo eos quis fuga laudantium aperiam quas nemo quod eius vel et animi?'
 
   const BeechcraftC18SInfo = () => {
     return (
@@ -86,27 +108,20 @@ const Home: React.FC = () => {
     );
   };
 
-
-  const text =
-    <>
-      <IonCard color="primary">
-        <IonCardHeader>
-          <IonCardTitle>Beechcraft C18 S</IonCardTitle>
-        </IonCardHeader>
-
-        <IonCardContent style={{ border: 'none' }}>{BeechcraftC18SInfo()}</IonCardContent>
-      </IonCard>
-    </>
-
+  const text = (
+    <IonCard color="primary">
+      <IonCardHeader>
+        <IonCardTitle>Beechcraft C18 S</IonCardTitle>
+      </IonCardHeader>
+      <IonCardContent style={{ border: 'none' }}>{BeechcraftC18SInfo()}</IonCardContent>
+    </IonCard>
+  );
 
   const scenes = [
-    { name: 'plane', label: 'Plane Model', image: '/assets/thumbnails/plane.png' },
-    { name: 'custom', label: 'Custom Model', image: '/assets/thumbnails/plane_2.png' },
-    { name: 'plane', label: 'Plane Model', image: '/assets/thumbnails/plane.png' },
-    { name: 'custom', label: 'Custom Model', image: '/assets/thumbnails/plane_2.png' },
-    { name: 'plane', label: 'Plane Model', image: '/assets/thumbnails/plane.png' },
-
+    { name: 'plane', label: 'Plane Model', image: '/assets/thumbnails/plane.png', modelPath: '/models/airplane/scene.gltf', attribution: '"Beechcraft C18 S Floats version" by helijah', cameraPosition: [], lightIntensity: 5 },
+    { name: 'custom', label: 'Custom Model', image: '/assets/thumbnails/plane_2.png', modelPath: '/models/ww_plane_gltf/scene.gltf', attribution: '"WW Plane" by Alejo', cameraPosition: [0, -1, 0], lightIntensity: 50 }
   ];
+
 
   return (
     <IonPage>
@@ -115,7 +130,6 @@ const Home: React.FC = () => {
           <div style={{ display: 'flex' }}>
             <IonIcon icon={appIcon} size='large'></IonIcon>
             <IonTitle>Museum Kiosk</IonTitle>
-
           </div>
         </IonToolbar>
       </IonHeader>
@@ -126,31 +140,32 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        {/* Layout with text area and model container side by side */}
         <div className="content-container">
           <div className="text-area">
             <IonText className='model-text'>{text}</IonText>
           </div>
           <div className="model-container">
-            {activeScene === 'plane' && <PlaneScene />}
-            {activeScene === 'custom' && <CustomScene />}
+            {scenes.map(scene =>
+              activeScene === scene.name && (
+                <SharedScene
+                  key={scene.name}
+                  modelPath={scene.modelPath}
+                  attribution={scene.attribution}
+                  cameraPosition={scene.cameraPosition}
+                  lightIntensity={scene.lightIntensity} />
+              )
+            )}
           </div>
         </div>
 
-        {/* Sliding Thumbnails overlayed on top of the model */}
         <div className="thumbnail-slider">
-          <Swiper spaceBetween={10} slidesPerView={scenes.length} centeredSlides={true} modules={[Navigation, Pagination, Scrollbar]}
-            navigation={true}
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-          >
+          <Swiper spaceBetween={10} slidesPerView={scenes.length} centeredSlides modules={[Navigation, Pagination, Scrollbar]}
+            navigation pagination={{ clickable: true }} scrollbar={{ draggable: true }}>
             {scenes.map((scene, index) => (
               <SwiperSlide key={index} onClick={() => setActiveScene(scene.name)}>
                 <div className={`thumbnail ${activeScene === scene.name ? 'active' : ''}`}>
                   <img src={scene.image} alt={scene.label} />
-                  <IonText color={'light'}>
-                    <p>{scene.label}</p>
-                  </IonText>
+                  <IonText color="light"><p>{scene.label}</p></IonText>
                 </div>
               </SwiperSlide>
             ))}
