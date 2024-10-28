@@ -5,12 +5,13 @@
     padding: 20px;
     height: calc(100vh - 200px);
     background-color: black;
+    overflow-y: scroll;
 }
 
 .text-area {
     width: 30%;
     height: 60vh;
-    padding-right: 20px;
+    padding: 20px;
     overflow-y: scroll;
 }
 
@@ -60,6 +61,8 @@
     font-size: 0.9em;
     margin-top: 8px;
     color: #fff;
+    overflow-wrap: normal;
+
 }
 
 .thumbnail.active {
@@ -86,8 +89,6 @@
 
     .text-area {
         width: 40%;
-        height: auto;
-        padding-right: 10px;
     }
 
     .model-container {
@@ -124,7 +125,6 @@
         width: 100%;
         margin-bottom: 20px;
         height: 40vh;
-        padding: 10px;
         /* Give space for both text and model */
         overflow-y: auto;
         min-height: 20vh;
@@ -159,6 +159,5 @@
 
     .thumbnail p {
         font-size: 0.7em;
-        overflow-wrap: normal;
     }
 }
