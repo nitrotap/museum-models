@@ -5,14 +5,13 @@
     padding: 20px;
     height: calc(100vh - 200px);
     background-color: black;
-    overflow-y: scroll;
 }
 
 .text-area {
     width: 30%;
     height: 60vh;
-    padding: 20px;
-    overflow-y: scroll;
+    /* padding: 20px; */
+    /* overflow-y: auto; */
 }
 
 .model-container {
@@ -25,7 +24,6 @@
 
 .model-text {
     height: 70vh;
-    width: 20vw;
     color: #fff;
     overflow: auto;
 }
@@ -138,7 +136,6 @@
     }
 
     .model-text {
-        width: 90vw;
         height: auto;
         margin-bottom: 20px;
     }
