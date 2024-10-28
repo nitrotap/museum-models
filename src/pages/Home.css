@@ -4,16 +4,14 @@
     align-items: flex-start;
     padding: 20px;
     height: calc(100vh - 200px);
-    /* Adjusted to account for the Swiper */
     background-color: black;
-    overflow: scroll;
 }
 
 .text-area {
-    /* width: 25%; */
+    width: 30%;
     height: 60vh;
     padding-right: 20px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .model-container {
@@ -29,6 +27,10 @@
     width: 20vw;
     color: #fff;
     overflow: auto;
+}
+
+.swiper {
+    height: 10vw !important;
 }
 
 /* Styling for the thumbnail slider */
@@ -65,13 +67,23 @@
     opacity: 1;
 }
 
-.text-area>ion-text>ion-card>ion-card-content>div {
+#root>ion-app>ion-router-outlet>div>ion-content>div.content-container>div.text-area>ion-text>div {
     border: none !important;
     padding: 0 !important;
 }
 
+@media (max-width: 1280px) {
+    .swiper {
+        min-height: 15vw !important;
+    }
+}
+
 /* Tablet view: At 768px or below, set text-area to 40% and model-container to 60% */
 @media (max-width: 1024px) {
+    .swiper {
+        min-height: 20vw !important;
+    }
+
     .text-area {
         width: 40%;
         height: auto;
@@ -80,7 +92,6 @@
 
     .model-container {
         width: 60%;
-        /* height: 60vh; */
     }
 
     .thumbnail-slider {
@@ -94,35 +105,46 @@
     }
 }
 
+@media (max-width: 768px) {
+    .swiper {
+        min-height: 30vw !important;
+    }
+}
+
+
 /* Mobile view: At 480px or below, stack elements vertically, reverse order, and add spacing */
 @media (max-width: 480px) {
     .content-container {
-        flex-direction: column-reverse;
-        /* Swap positions */
-        align-items: center;
+        display: block;
         padding: 10px;
+        overflow-y: scroll;
     }
 
     .text-area {
         width: 100%;
-        height: auto;
-        padding-right: 0;
-        margin-top: 5vw;
-        min-height: 100vh;
-        /* Add space between text-area and model-container */
+        margin-bottom: 20px;
+        height: 40vh;
+        padding: 10px;
+        /* Give space for both text and model */
+        overflow-y: auto;
+        min-height: 20vh;
     }
 
     .model-container {
         width: 100%;
-        height: 60vh;
+        height: 40vh;
         margin-bottom: 20px;
-        /* Add space to separate model-container from other elements */
+        padding-top: 35vh;
     }
 
     .model-text {
         width: 90vw;
         height: auto;
         margin-bottom: 20px;
+    }
+
+    .swiper {
+        min-height: 35vw !important;
     }
 
     .thumbnail-slider {
@@ -137,5 +159,6 @@
 
     .thumbnail p {
         font-size: 0.7em;
+        overflow-wrap: normal;
     }
 }

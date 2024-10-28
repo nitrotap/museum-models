@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
   const BeechcraftC18SInfo = () => {
     return (
-      <div style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px', maxWidth: '500px', margin: 'auto' }}>
+      <div style={{ border: '1px solid #ccc', padding: '20px', borderRadius: '8px', maxWidth: '500px' }}>
         <div>
           <section>
             <h3><strong>General Information</strong></h3>
@@ -108,14 +108,63 @@ const Home: React.FC = () => {
     );
   };
 
-  const text = (
-    <IonCard color="primary">
-      <IonCardHeader>
-        <IonCardTitle>Beechcraft C18 S</IonCardTitle>
-      </IonCardHeader>
-      <IonCardContent style={{ border: 'none' }}>{BeechcraftC18SInfo()}</IonCardContent>
-    </IonCard>
-  );
+
+  const DiamondDA4_Twin_Star = () => {
+    return (
+      <div>
+        <section>
+          <h3>General Information</h3>
+          <p><strong>Manufacturer:</strong> Diamond Aircraft Industries</p>
+          <p><strong>First Introduced:</strong> 2004</p>
+          <p><strong>Primary Use:</strong> Light twin-engine utility aircraft, often used for flight training, personal use, and reconnaissance</p>
+        </section>
+
+        <section>
+          <h3>Specifications</h3>
+          <p><strong>Crew:</strong> 1 or 2 (Pilot and optional co-pilot)</p>
+          <p><strong>Capacity:</strong> Up to 3 passengers</p>
+          <p><strong>Length:</strong> 28 feet 1 inch (8.56 meters)</p>
+          <p><strong>Wingspan:</strong> 44 feet (13.42 meters)</p>
+          <p><strong>Height:</strong> 8 feet 2 inches (2.49 meters)</p>
+          <p><strong>Wing Area:</strong> 177.5 square feet (16.5 square meters)</p>
+        </section>
+
+        <section>
+          <h3>Performance</h3>
+          <p><strong>Maximum Speed:</strong> 226 mph (364 km/h)</p>
+          <p><strong>Cruising Speed:</strong> 180 mph (290 km/h)</p>
+          <p><strong>Range:</strong> Approximately 1,250 miles (2,012 km)</p>
+          <p><strong>Service Ceiling:</strong> 18,000 feet (5,486 meters)</p>
+        </section>
+
+        <section>
+          <h3>Engine and Propulsion</h3>
+          <p><strong>Engine:</strong> Two Austro AE300 diesel engines (or Thielert TAE 125 in older models)</p>
+          <p><strong>Horsepower:</strong> 168 hp per engine (Austro AE300)</p>
+          <p><strong>Propellers:</strong> 3-bladed constant-speed propellers</p>
+        </section>
+
+        <section>
+          <h3>Weight</h3>
+          <p><strong>Empty Weight:</strong> 3,104 lbs (1,408 kg)</p>
+          <p><strong>Maximum Takeoff Weight:</strong> 4,407 lbs (2,000 kg)</p>
+        </section>
+
+        <section>
+          <h3>Special Features</h3>
+          <p><strong>Construction:</strong> Composite airframe for durability and reduced weight</p>
+          <p><strong>Avionics:</strong> Garmin G1000 integrated flight deck</p>
+          <p><strong>Fuel Efficiency:</strong> Diesel engines with high fuel efficiency, suitable for long-distance flights</p>
+        </section>
+
+        <section>
+          <h3>Notable Uses</h3>
+          <p>Widely used for advanced flight training, surveillance, and as a personal aircraft. Known for its fuel efficiency and modern avionics.</p>
+        </section>
+      </div>
+
+    );
+  }
 
   // Define the Scene type
   interface Scene {
@@ -126,30 +175,34 @@ const Home: React.FC = () => {
     attribution: string;
     cameraPosition: number[]; // Array of numbers
     lightIntensity: number;
+    jsx: any;
   }
 
   // Define the scenes array with the Scene type
   const scenes: Scene[] = [
     {
       name: 'plane',
-      label: 'Plane Model',
+      label: 'Beechcraft C18 S',
       image: '/assets/thumbnails/plane.png',
       modelPath: '/models/airplane/scene.gltf',
       attribution: '"Beechcraft C18 S Floats version" by helijah',
       cameraPosition: [],
-      lightIntensity: 5
+      lightIntensity: 5,
+      jsx: BeechcraftC18SInfo()
     },
     {
       name: 'diamond',
-      label: 'Diamond Model',
+      label: 'Diamond Da42',
       image: '/assets/thumbnails/plane_diamond.png',
       modelPath: '/models/diamond_da42_twin_star_gltf/scene.gltf',
-      attribution: '"WW Plane" by Alejo',
+      attribution: 'Diamond Da42 "Twin Star" by helijah',
       cameraPosition: [],
-      lightIntensity: 5
+      lightIntensity: 5,
+      jsx: DiamondDA4_Twin_Star()
     }
   ];
 
+  const activeSceneData = scenes.find(scene => scene.name === activeScene);
 
   return (
     <IonPage>
@@ -186,7 +239,7 @@ const Home: React.FC = () => {
         {/* Content Container with Text and Model */}
         <div className="content-container">
           <div className="text-area">
-            <IonText className='model-text'>{text}</IonText>
+            <IonText className='model-text'>{activeSceneData?.jsx}</IonText>
           </div>
           <div className="model-container">
             {scenes.map(scene =>
